@@ -82,16 +82,18 @@ tempo_execucao = fim - inicio
 
 #-----------------------------------------------------------------------plotando --------------------------------------------------------------------------
 
-plt.figure(figsize=(10, 6))
-plt.scatter(data[:, ref_data['Age']], data[:, ref_data['survive']], color='blue', label='Data')
-plt.xlabel('Idade')
-plt.ylabel('Sobrevivência')
-x_values = np.linspace(min(data[:, ref_data['Age']]), max(data[:, ref_data['Age']]), 100)
-z_values = beta0 + pesos[ref_data['Age']] * x_values
-y_values = sigmoide(z_values)
-plt.plot(x_values, y_values, color='red', label='Sigmoide')
-plt.legend()
-plt.show()
+for var in variaveis:
+    plt.figure(figsize=(10, 6))
+    plt.scatter(data[:, ref_data[var]], data[:, ref_data['survive']], color='blue', label='Data')
+    plt.xlabel(var)
+    plt.ylabel('Sobrevivência')
+    x_values = np.linspace(min(data[:, ref_data[var]]), max(data[:, ref_data[var]]), 100)
+    z_values = beta0 + pesos[ref_data[var]] * x_values
+    y_values = sigmoide(z_values)
+    plt.plot(x_values, y_values, color='red', label='Sigmoide')
+    plt.legend()
+    plt.title(f'Sobrevivência vs {var}')
+    plt.show()
 
 
 #------------------------------------------------------testando dados apos treinamento --------------------------------------------------------------------
